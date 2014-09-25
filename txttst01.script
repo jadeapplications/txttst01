@@ -1,0 +1,50 @@
+// Copyright (c) 2014 Mimetics Inc.
+// All Rights Reserved
+//
+// THIS SOFTWARE IS PROVIDED BY MIMETICS "AS IS" WITHOUT ANY EXPRESSED OR 
+// IMPLIED WARRANTIES.  IN NO CASE SHALL MIMETICS OR ANY CONTRIBUTORS BE
+// LIABLE IN ANY DAMAGES CAUSED BY THE USE OF THIS SOFTWARE.  
+//
+// FileName: txttst01.script
+// Version : 04.0
+//
+// Author  : myke predko
+//
+// Description: Read a .txt File and update it's value
+//
+// Release History:
+//  txttst01 - First Release
+//  
+str                         txtFile;
+str                         newtxtFile;
+str                         dirFile;
+int                         i;
+
+
+    dirFile = syscall(dir, "txttst01.txt");
+    if ("" == (dirFile = syscall(dirnext, ""))) {
+        syscall(error, "Must have \"txttxt01.txt\" to operate");
+//                      1234567890123456789012345678901234567890
+    }
+    txtFile = syscall(fileread, "txttst01.txt");
+
+    syscall(cleardisplay, "");
+    syscall(setcursorstart, "10:10");
+    syscall(drawtext, "txttst01.txt = " + txtFile);
+
+    for (i = 0; len(txtFile) > i; ++i) {
+        if (('0' > txtFile.i) || ('9' < txtFile.i)) {
+            break;
+        }
+    }
+
+    i = stoi(syscall(tostring, itos(i) + ":" + txtFile));
+
+    for (newtxtFile = itos(i + 1); len(newtxtFile) < 3; newtxtFile = "0" + newtxtFile);
+
+    if ("\r\n" == syscall(fromstring, itos(len(txtFile) - 2) + ":" + txtFile)) {
+        newtxtFile = newtxtFile + "\r\n";
+    }
+    
+    syscall(filedelete, "txttst01.txt");  
+    syscall(filewrite, "txttst01.txt:" + newtxtFile);  
