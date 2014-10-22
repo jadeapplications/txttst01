@@ -1,6 +1,8 @@
 txttst01
 ========
 
+C: 
+
 Demonstrate how to look for a text (.txt) file, read the file and then update it.
 
 syscall APIs used:
@@ -9,6 +11,14 @@ syscall APIs used:
 - fileread: return the contents of the specified text (.txt) file.  No wildcards are allowed.  
 - filedelete: delete the specified (.txt) file.  This is required before the file can be written to.  No wildcards are allowed.  
 - filewrite: write a string into the specfied (.txt) file.  This file cannot already exist.  No wildcards are allowed.  
+
+### Project Information
+```
+Type              : C
+Version           : 01.0
+Author            : myke predko
+Firmware          : 42
+```
 
 ### Release History:
 2014.09.20 - Initial Release.
